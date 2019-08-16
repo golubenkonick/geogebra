@@ -45,12 +45,6 @@ namespace WindowsFormsGraphics_math
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            RealSegment test1 = new RealSegment(new RealPoint(5, 3), new RealPoint(3, 5));
-            RealSegment test2 = new RealSegment(new RealPoint(0, 0), new RealPoint(7, 7));
-            RealIntersect test3 = new RealIntersect(test1, test2);
-            realFigureList.Add(test1);
-            realFigureList.Add(test2);
-            realFigureList.Add(test3);
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
