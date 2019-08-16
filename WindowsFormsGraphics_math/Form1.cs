@@ -21,6 +21,8 @@ namespace WindowsFormsGraphics_math
         RealPoint clickPoint;
         List<RealPoint> pointList;
         Label selectedLabel;
+        RealSegment selectedSeg1 = null;
+        RealSegment selectedSeg2 = null;
         //List<Label> labelList;
 
         public Form1()
@@ -64,23 +66,27 @@ namespace WindowsFormsGraphics_math
             double x;
             double y;
 
-            RealSegment selectedSeg1 = null;
-            RealSegment selectedSeg2 = null;
+          
 
             if (IntersectButton.Checked)
             {
                 if (selectedSeg1 == null)
-                    selectedSeg1 = (RealSegment)SelectFigure(e);
-                if (selectedSeg1 != null)
                 {
-                    selectedSeg1.SetBackLight();
+                    selectedSeg1 = (RealSegment)SelectFigure(e);
+                    if (selectedSeg1 != null)
+                    {
+                        selectedSeg1.SetBackLight();
+                    }
+                    this.Text = "select first segment";
                 }
 
                 else
                 {
+                    this.Text = "select second segment";
                     selectedSeg2 = (RealSegment)SelectFigure(e);
                     if (selectedSeg2 != null)
                     {
+                        selectedSeg1.UnSetBackLight();
                         RealIntersect intersectPoint = new RealIntersect(selectedSeg1, selectedSeg2);
                         realFigureList.Add(intersectPoint);
                         selectedSeg1 = null;
