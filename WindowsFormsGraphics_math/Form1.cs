@@ -71,6 +71,11 @@ namespace WindowsFormsGraphics_math
             {
                 if (selectedSeg1 == null)
                     selectedSeg1 = (RealSegment)SelectFigure(e);
+                if (selectedSeg1 != null)
+                {
+                    selectedSeg1.SetBackLight();
+                }
+
                 else
                 {
                     selectedSeg2 = (RealSegment)SelectFigure(e);
