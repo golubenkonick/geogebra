@@ -344,25 +344,6 @@ namespace WindowsFormsGraphics_math
         }
 
 
-        //private void SelectPoint(MouseEventArgs e)
-        //{
-        //    foreach (RealFigure figure in realFigureList)
-        //    {
-        //        if (figure is RealPoint)
-        //        {
-        //            RealPoint point = (RealPoint)figure;
-        //            int x1 = cs1.RealToVisualX(point.x);
-        //            int y1 = cs1.RealToVisualY(point.y);
-        //            if (cs1.GetDistance(x1, y1, e.X, e.Y) < cs1.radius)
-        //            {
-        //                selectedPoint = (RealPoint)figure;
-        //                selectedPoint.selected = true;
-        //                break;
-        //            }
-        //        }
-        //    }
-        //}
-
 
         private RealFigure SelectFigure(MouseEventArgs e)
         {
