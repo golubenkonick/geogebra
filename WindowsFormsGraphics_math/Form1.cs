@@ -59,286 +59,337 @@ namespace WindowsFormsGraphics_math
             }
         }
 
-       
 
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        private void IntersectAction(object sender, MouseEventArgs e)
+        {
+            if (selectedSeg1 == null)
+            {
+                selectedSeg1 = (RealSegment)SelectFigure(e);
+                if (selectedSeg1 != null)
+                {
+                    selectedSeg1.SetBackLight();
+                }
+                this.Text = "select first segment";
+            }
+
+            else
+            {
+                this.Text = "select second segment";
+                selectedSeg2 = (RealSegment)SelectFigure(e);
+                if (selectedSeg2 != null)
+                {
+                    selectedSeg1.UnSetBackLight();
+                    RealIntersect intersectPoint = new RealIntersect(selectedSeg1, selectedSeg2);
+                    realFigureList.Add(intersectPoint);
+                    selectedSeg1 = null;
+                    selectedSeg2 = null;
+                }
+            }
+        }
+
+        private void AddPointAction(object sender, MouseEventArgs e)
         {
             double x;
             double y;
 
-          
-
-            if (IntersectButton.Checked)
+            if (RoundingButton.Checked)
             {
-                if (selectedSeg1 == null)
-                {
-                    selectedSeg1 = (RealSegment)SelectFigure(e);
-                    if (selectedSeg1 != null)
-                    {
-                        selectedSeg1.SetBackLight();
-                    }
-                    this.Text = "select first segment";
-                }
+                x = Math.Round(cs1.VisualToRealX(e.X));
+                y = Math.Round(cs1.VisualToRealY(e.Y));
+            }
+            else
+            {
+                x = cs1.VisualToRealX(e.X);
+                y = cs1.VisualToRealY(e.Y);
+            }
+            realFigureList.Add(new RealPoint(x, y));     
+        }
 
-                else
-                {
-                    this.Text = "select second segment";
-                    selectedSeg2 = (RealSegment)SelectFigure(e);
-                    if (selectedSeg2 != null)
-                    {
-                        selectedSeg1.UnSetBackLight();
-                        RealIntersect intersectPoint = new RealIntersect(selectedSeg1, selectedSeg2);
-                        realFigureList.Add(intersectPoint);
-                        selectedSeg1 = null;
-                        selectedSeg2 = null;
-                    }
-                }
+        private void AddLineAction(object sender, MouseEventArgs e)
+        {
+            double x;
+            double y;
+
+            if (RoundingButton.Checked)
+            {
+                x = Math.Round(cs1.VisualToRealX(e.X));
+                y = Math.Round(cs1.VisualToRealY(e.Y));
+            }
+            else
+            {
+                x = cs1.VisualToRealX(e.X);
+                y = cs1.VisualToRealY(e.Y);
             }
 
-
-
-
-            if (AddPointButton.Checked)
+            if (creatingLine)
             {
                 if (RoundingButton.Checked)
                 {
-                    x = Math.Round(cs1.VisualToRealX(e.X));
-                    y = Math.Round(cs1.VisualToRealY(e.Y));
+                    selectedPoint.x = Math.Round(selectedPoint.x);
+                    selectedPoint.y = Math.Round(selectedPoint.y);
+                }
+                selectedPoint = null;
+                creatingLine = false;
+            }
+            else
+            {
+                firstPoint = new RealPoint(x, y);
+                realFigureList.Add(firstPoint);
+                secondPoint = new RealPoint(x, y);
+                realFigureList.Add(secondPoint);
+                RealSegment rs = new RealSegment(firstPoint, secondPoint);
+                realFigureList.Add(rs);
+                selectedPoint = secondPoint;
+                creatingLine = true;
+            }
+        }
+
+        private void AddRectangeAction(object sender, MouseEventArgs e)
+        {
+            double x;
+            double y;
+
+            if (RoundingButton.Checked)
+            {
+                x = Math.Round(cs1.VisualToRealX(e.X));
+                y = Math.Round(cs1.VisualToRealY(e.Y));
+            }
+            else
+            {
+                x = cs1.VisualToRealX(e.X);
+                y = cs1.VisualToRealY(e.Y);
+            }
+
+            if (creatingLine)
+            {
+                if (RoundingButton.Checked)
+                {
+                    selectedPoint.x = Math.Round(selectedPoint.x);
+                    selectedPoint.y = Math.Round(selectedPoint.y);
+                }
+                selectedPoint = null;
+                creatingLine = false;
+            }
+            else
+            {
+                firstPoint = new RealPoint(x, y);
+                realFigureList.Add(firstPoint);
+                secondPoint = new RealPoint(x, y);
+                realFigureList.Add(secondPoint);
+                RealRectangle rr = new RealRectangle(firstPoint, secondPoint);
+                realFigureList.Add(rr);
+                selectedPoint = secondPoint;
+                creatingLine = true;
+            }
+        }
+
+        private void AddCircleAction(object sender, MouseEventArgs e)
+        {
+            double x;
+            double y;
+
+            if (RoundingButton.Checked)
+            {
+                x = Math.Round(cs1.VisualToRealX(e.X));
+                y = Math.Round(cs1.VisualToRealY(e.Y));
+            }
+            else
+            {
+                x = cs1.VisualToRealX(e.X);
+                y = cs1.VisualToRealY(e.Y);
+            }
+
+            if (creatingLine)
+            {
+                if (RoundingButton.Checked)
+                {
+                    selectedPoint.x = Math.Round(selectedPoint.x);
+                    selectedPoint.y = Math.Round(selectedPoint.y);
+                }
+                selectedPoint = null;
+                creatingLine = false;
+            }
+            else
+            {
+                firstPoint = new RealPoint(x, y);
+                realFigureList.Add(firstPoint);
+                secondPoint = new RealPoint(x, y);
+                realFigureList.Add(secondPoint);
+                realFigureList.Add(new RealCircle(firstPoint, secondPoint, cs1));
+                selectedPoint = secondPoint;
+                creatingLine = true;
+            }
+        }
+
+        private void RightTriangeAction(object sender, MouseEventArgs e)
+        {
+            double x;
+            double y;
+
+            if (RoundingButton.Checked)
+            {
+                x = Math.Round(cs1.VisualToRealX(e.X));
+                y = Math.Round(cs1.VisualToRealY(e.Y));
+            }
+            else
+            {
+                x = cs1.VisualToRealX(e.X);
+                y = cs1.VisualToRealY(e.Y);
+            }
+
+            if (creatingLine)
+            {
+                if (RoundingButton.Checked)
+                {
+                    selectedPoint.x = Math.Round(selectedPoint.x);
+                    selectedPoint.y = Math.Round(selectedPoint.y);
+                }
+                selectedPoint = null;
+                creatingLine = false;
+            }
+            else
+            {
+                firstPoint = new RealPoint(x, y);
+                realFigureList.Add(firstPoint);
+                secondPoint = new RealPoint(x, y);
+                realFigureList.Add(secondPoint);
+                RealRightTriangle rt = new RealRightTriangle(firstPoint, secondPoint);
+                realFigureList.Add(rt);
+                selectedPoint = secondPoint;
+                creatingLine = true;
+            }
+        }
+
+        private void PolygonAction(object sender, MouseEventArgs e)
+        {
+            double x;
+            double y;
+
+            if (RoundingButton.Checked)
+            {
+                x = Math.Round(cs1.VisualToRealX(e.X));
+                y = Math.Round(cs1.VisualToRealY(e.Y));
+            }
+            else
+            {
+                x = cs1.VisualToRealX(e.X);
+                y = cs1.VisualToRealY(e.Y);
+            }
+
+            if (creatingLine)
+            {
+                if (RoundingButton.Checked)
+                {
+                    selectedPoint.x = Math.Round(selectedPoint.x);
+                    selectedPoint.y = Math.Round(selectedPoint.y);
+                }
+                selectedPoint = new RealPoint(x, y);
+                int x1 = cs1.RealToVisualX(pointList[0].x);
+                int y1 = cs1.RealToVisualY(pointList[0].y);
+                if (cs1.GetDistance(x1, y1, e.X, e.Y) < cs1.radius)
+                {
+                    creatingLine = false;
+                    pointList.RemoveAt(pointList.Count - 1);
+                    realFigureList.RemoveAt(realFigureList.Count - 1);
                 }
                 else
                 {
-                    x = cs1.VisualToRealX(e.X);
-                    y = cs1.VisualToRealY(e.Y);
-                }               
-                realFigureList.Add(new RealPoint(x, y));     
+                    pointList.Add(selectedPoint);
+                    realFigureList.Add(selectedPoint);
+                }
+            }
+            else
+            {
+                pointList = new List<RealPoint>();
+                firstPoint = new RealPoint(x, y);
+                secondPoint = new RealPoint(x, y);
+                realFigureList.Add(firstPoint);
+                realFigureList.Add(secondPoint);
+                pointList.Add(firstPoint);
+                pointList.Add(secondPoint);
+
+                RealPolygon polygon = new RealPolygon(pointList);
+                realFigureList.Add(polygon);
+                selectedPoint = secondPoint;
+                creatingLine = true;
+            }
+        }
+
+        private void IsoscelesAction(object sender, MouseEventArgs e)
+        {
+            double x;
+            double y;
+
+            if (RoundingButton.Checked)
+            {
+                x = Math.Round(cs1.VisualToRealX(e.X));
+                y = Math.Round(cs1.VisualToRealY(e.Y));
+            }
+            else
+            {
+                x = cs1.VisualToRealX(e.X);
+                y = cs1.VisualToRealY(e.Y);
+            }
+
+            if (creatingLine)
+            {
+                if (RoundingButton.Checked)
+                {
+                    selectedPoint.x = Math.Round(selectedPoint.x);
+                    selectedPoint.y = Math.Round(selectedPoint.y);
+                }
+                selectedPoint = null;
+                creatingLine = false;
+            }
+            else
+            {
+                firstPoint = new RealPoint(x, y);
+                realFigureList.Add(firstPoint);
+                secondPoint = new RealPoint(x, y);
+                realFigureList.Add(secondPoint);
+                RealIsoscelesTriangle rt = new RealIsoscelesTriangle(firstPoint, secondPoint);
+                realFigureList.Add(rt);
+                selectedPoint = secondPoint;
+                creatingLine = true;
+            }
+        }
+
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (IntersectButton.Checked)
+            {
+                IntersectAction(sender, e);
+            }
+            
+            if (AddPointButton.Checked)
+            {
+                AddPointAction(sender, e);
             }
            
             if (AddLineButton.Checked)
             {
-                if (RoundingButton.Checked)
-                {
-                    x = Math.Round(cs1.VisualToRealX(e.X));
-                    y = Math.Round(cs1.VisualToRealY(e.Y));
-                }
-                else
-                {
-                    x = cs1.VisualToRealX(e.X);
-                    y = cs1.VisualToRealY(e.Y);
-                }
-                
-                if (creatingLine)
-                {
-                    if (RoundingButton.Checked)
-                    {
-                        selectedPoint.x = Math.Round(selectedPoint.x);
-                        selectedPoint.y = Math.Round(selectedPoint.y);
-                    }
-                    selectedPoint = null;
-                    creatingLine = false;
-                }
-                else
-                {
-                    firstPoint = new RealPoint(x, y);                   
-                    realFigureList.Add(firstPoint);
-                    secondPoint = new RealPoint(x, y);
-                    realFigureList.Add(secondPoint);
-                    RealSegment rs = new RealSegment(firstPoint, secondPoint);
-                    realFigureList.Add(rs);                    
-                    selectedPoint = secondPoint;                   
-                    creatingLine = true;
-                }
+                AddLineAction(sender, e);
             }
             if (AddRectangleButton.Checked)
             {
-                if (RoundingButton.Checked)
-                {
-                    x = Math.Round(cs1.VisualToRealX(e.X));
-                    y = Math.Round(cs1.VisualToRealY(e.Y));
-                }
-                else
-                {
-                    x = cs1.VisualToRealX(e.X);
-                    y = cs1.VisualToRealY(e.Y);
-                }
-
-                if (creatingLine)
-                {
-                    if (RoundingButton.Checked)
-                    {
-                        selectedPoint.x = Math.Round(selectedPoint.x);
-                        selectedPoint.y = Math.Round(selectedPoint.y);
-                    }
-                    selectedPoint = null;
-                    creatingLine = false;
-                }
-                else
-                {
-                    firstPoint = new RealPoint(x, y);
-                    realFigureList.Add(firstPoint);
-                    secondPoint = new RealPoint(x, y);
-                    realFigureList.Add(secondPoint);
-                    RealRectangle rr = new RealRectangle(firstPoint, secondPoint);
-                    realFigureList.Add(rr);
-                    selectedPoint = secondPoint;
-                    creatingLine = true;
-                }
+                AddRectangeAction(sender, e);
             }
             if (AddCircleButton.Checked)
             {
-                if (RoundingButton.Checked)
-                {
-                    x = Math.Round(cs1.VisualToRealX(e.X));
-                    y = Math.Round(cs1.VisualToRealY(e.Y));
-                }
-                else
-                {
-                    x = cs1.VisualToRealX(e.X);
-                    y = cs1.VisualToRealY(e.Y);
-                }
-
-                if (creatingLine)
-                {
-                    if (RoundingButton.Checked)
-                    {
-                        selectedPoint.x = Math.Round(selectedPoint.x);
-                        selectedPoint.y = Math.Round(selectedPoint.y);
-                    }
-                    selectedPoint = null;
-                    creatingLine = false;
-                }
-                else
-                {
-                    firstPoint = new RealPoint(x, y);                   
-                    realFigureList.Add(firstPoint);
-                    secondPoint = new RealPoint(x, y);                    
-                    realFigureList.Add(secondPoint);
-                    realFigureList.Add(new RealCircle(firstPoint, secondPoint, cs1));
-                    selectedPoint = secondPoint;   
-                    creatingLine = true;
-                }
+                AddCircleAction(sender, e);
             }
             if (RightTriangleButton.Checked)
             {
-                if (RoundingButton.Checked)
-                {
-                    x = Math.Round(cs1.VisualToRealX(e.X));
-                    y = Math.Round(cs1.VisualToRealY(e.Y));
-                }
-                else
-                {
-                    x = cs1.VisualToRealX(e.X);
-                    y = cs1.VisualToRealY(e.Y);
-                }
-
-                if (creatingLine)
-                {
-                    if (RoundingButton.Checked)
-                    {
-                        selectedPoint.x = Math.Round(selectedPoint.x);
-                        selectedPoint.y = Math.Round(selectedPoint.y);
-                    }
-                    selectedPoint = null;
-                    creatingLine = false;
-                }
-                else
-                {
-                    firstPoint = new RealPoint(x, y);
-                    realFigureList.Add(firstPoint);
-                    secondPoint = new RealPoint(x, y);
-                    realFigureList.Add(secondPoint);
-                    RealRightTriangle rt = new RealRightTriangle(firstPoint, secondPoint);
-                    realFigureList.Add(rt);
-                    selectedPoint = secondPoint;
-                    creatingLine = true;
-                }
-
+                RightTriangeAction(sender, e);
             }
             if (AddPolygonButton.Checked)
             {
-                if (RoundingButton.Checked)
-                {
-                    x = Math.Round(cs1.VisualToRealX(e.X));
-                    y = Math.Round(cs1.VisualToRealY(e.Y));
-                }
-                else
-                {
-                    x = cs1.VisualToRealX(e.X);
-                    y = cs1.VisualToRealY(e.Y);
-                }
-
-                if (creatingLine)
-                {
-                    if (RoundingButton.Checked)
-                    {
-                        selectedPoint.x = Math.Round(selectedPoint.x);
-                        selectedPoint.y = Math.Round(selectedPoint.y);
-                    }                    
-                    selectedPoint = new RealPoint(x, y);                    
-                    int x1 = cs1.RealToVisualX(pointList[0].x);
-                    int y1 = cs1.RealToVisualY(pointList[0].y);
-                    if (cs1.GetDistance(x1, y1, e.X, e.Y) < cs1.radius)
-                    {
-                        creatingLine = false;
-                        pointList.RemoveAt(pointList.Count - 1);
-                        realFigureList.RemoveAt(realFigureList.Count - 1);
-                    } 
-                    else 
-                    {
-                        pointList.Add(selectedPoint);
-                        realFigureList.Add(selectedPoint);
-                    }
-                }
-                else
-                {
-                    pointList = new List<RealPoint>(); 
-                    firstPoint = new RealPoint(x, y);                   
-                    secondPoint = new RealPoint(x, y); 
-                    realFigureList.Add(firstPoint);
-                    realFigureList.Add(secondPoint);
-                    pointList.Add(firstPoint);
-                    pointList.Add(secondPoint);
-
-                    RealPolygon polygon = new RealPolygon(pointList);
-                    realFigureList.Add(polygon);
-                    selectedPoint = secondPoint;
-                    creatingLine = true;
-                }
-
+                PolygonAction(sender, e);
             }
+
             if (IsoscelesTriangleButton.Checked)
             {
-                if (RoundingButton.Checked)
-                {
-                    x = Math.Round(cs1.VisualToRealX(e.X));
-                    y = Math.Round(cs1.VisualToRealY(e.Y));
-                }
-                else
-                {
-                    x = cs1.VisualToRealX(e.X);
-                    y = cs1.VisualToRealY(e.Y);
-                }
-
-                if (creatingLine)
-                {
-                    if (RoundingButton.Checked)
-                    {
-                        selectedPoint.x = Math.Round(selectedPoint.x);
-                        selectedPoint.y = Math.Round(selectedPoint.y);
-                    }
-                    selectedPoint = null;
-                    creatingLine = false;
-                }
-                else
-                {
-                    firstPoint = new RealPoint(x, y);
-                    realFigureList.Add(firstPoint);
-                    secondPoint = new RealPoint(x, y);
-                    realFigureList.Add(secondPoint);
-                    RealIsoscelesTriangle rt = new RealIsoscelesTriangle(firstPoint, secondPoint);
-                    realFigureList.Add(rt);
-                    selectedPoint = secondPoint;
-                    creatingLine = true;
-                }
+                IsoscelesAction(sender, e);
             }
             pictureBox1.Invalidate();
         }
