@@ -11,7 +11,11 @@ namespace WindowsFormsGraphics_math
 {
     public partial class Form1 : Form
     {
+        delegate void Action(object sender, MouseEventArgs e);
+        int actionNumber = 0;
+
         private CoordinateSystem cs1;
+        Action[] actions;
         RealPoint firstPoint;
         RealPoint secondPoint;
         bool creatingLine;      
@@ -42,11 +46,22 @@ namespace WindowsFormsGraphics_math
             realFigureList = new List<RealFigure>();          
             selectedPoint = null;
             selectedLabel = null;
+            actions = new Action[8];
+          
         }
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            actions[0] = AddPointAction;
+            actions[1] = AddLineAction;
+            actions[2] = AddRightTriangeAction;
+            actions[3] = AddRectangeAction;
+            actions[4] = AddIntersectAction;
+            actions[5] = AddIsoscelesAction;
+            actions[6] = AddCircleAction;
+            actions[7] = AddPolygonAction;
+
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -60,7 +75,7 @@ namespace WindowsFormsGraphics_math
         }
 
 
-        private void IntersectAction(object sender, MouseEventArgs e)
+        private void AddIntersectAction(object sender, MouseEventArgs e)
         {
             if (selectedSeg1 == null)
             {
@@ -221,7 +236,7 @@ namespace WindowsFormsGraphics_math
             }
         }
 
-        private void RightTriangeAction(object sender, MouseEventArgs e)
+        private void AddRightTriangeAction(object sender, MouseEventArgs e)
         {
             double x;
             double y;
@@ -260,7 +275,7 @@ namespace WindowsFormsGraphics_math
             }
         }
 
-        private void PolygonAction(object sender, MouseEventArgs e)
+        private void AddPolygonAction(object sender, MouseEventArgs e)
         {
             double x;
             double y;
@@ -315,7 +330,7 @@ namespace WindowsFormsGraphics_math
             }
         }
 
-        private void IsoscelesAction(object sender, MouseEventArgs e)
+        private void AddIsoscelesAction(object sender, MouseEventArgs e)
         {
             double x;
             double y;
@@ -356,39 +371,46 @@ namespace WindowsFormsGraphics_math
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (IntersectButton.Checked)
+            if (actionNumber != -1)
             {
-                IntersectAction(sender, e);
-            }            
-            if (AddPointButton.Checked)
-            {
-                AddPointAction(sender, e);
-            }           
-            if (AddLineButton.Checked)
-            {
-                AddLineAction(sender, e);
-            }
-            if (AddRectangleButton.Checked)
-            {
-                AddRectangeAction(sender, e);
-            }
-            if (AddCircleButton.Checked)
-            {
-                AddCircleAction(sender, e);
-            }
-            if (RightTriangleButton.Checked)
-            {
-                RightTriangeAction(sender, e);
-            }
-            if (AddPolygonButton.Checked)
-            {
-                PolygonAction(sender, e);
+                actions[actionNumber](sender, e);
             }
 
-            if (IsoscelesTriangleButton.Checked)
-            {
-                IsoscelesAction(sender, e);
-            }
+
+            //if (IntersectButton.Checked)
+            //{
+            //    AddIntersectAction(sender, e);
+            //}            
+            //if (AddPointButton.Checked)
+            //{
+            //    AddPointAction(sender, e);
+            //}           
+            //if (AddLineButton.Checked)
+            //{
+            //    AddLineAction(sender, e);
+            //}
+            //if (AddRectangleButton.Checked)
+            //{
+            //    AddRectangeAction(sender, e);
+            //}
+            //if (AddCircleButton.Checked)
+            //{
+            //    AddCircleAction(sender, e);
+            //}
+            //if (RightTriangleButton.Checked)
+            //{
+            //    AddRightTriangeAction(sender, e);
+            //}
+            //if (AddPolygonButton.Checked)
+            //{
+            //    AddPolygonAction(sender, e);
+            //}
+
+            //if (IsoscelesTriangleButton.Checked)
+            //{
+            //    AddIsoscelesAction(sender, e);
+            //}
+            
             pictureBox1.Invalidate();
         }
 
@@ -520,6 +542,7 @@ namespace WindowsFormsGraphics_math
         private void MoveButton_Click(object sender, EventArgs e)
         {
             CheckEngine();
+            actionNumber = -1;
             MoveButton.Checked = true;
         }
 
@@ -527,6 +550,7 @@ namespace WindowsFormsGraphics_math
         {
             CheckEngine();
             AddPointButton.Checked = true;
+            actionNumber = 0;
             AddMenu.Text = "Add (Point)";
         }
 
@@ -534,6 +558,7 @@ namespace WindowsFormsGraphics_math
         {
             CheckEngine();
             AddLineButton.Checked = true;
+            actionNumber = 1;
             AddMenu.Text = "Add (Line)";
         }
 
@@ -555,6 +580,7 @@ namespace WindowsFormsGraphics_math
         {
             CheckEngine();
             AddRectangleButton.Checked = true;
+            actionNumber = 3;
             AddMenu.Text = "Add (Rectangle)";
         }
 
@@ -562,6 +588,7 @@ namespace WindowsFormsGraphics_math
         {
             CheckEngine();
             AddCircleButton.Checked = true;
+            actionNumber = 6;
             AddMenu.Text = "Add (Circle)";
         }
 
@@ -569,6 +596,7 @@ namespace WindowsFormsGraphics_math
         {
             CheckEngine();
             RightTriangleButton.Checked = true;
+            actionNumber = 2;
             AddMenu.Text = "Add (Right Triangle)";
         }
 
@@ -582,6 +610,7 @@ namespace WindowsFormsGraphics_math
         {
             CheckEngine();
             IsoscelesTriangleButton.Checked = true;
+            actionNumber = 5;
             AddMenu.Text = "Add (Isosceles Triangle)";
         }
 
@@ -589,6 +618,7 @@ namespace WindowsFormsGraphics_math
         {
             CheckEngine();
             AddPolygonButton.Checked = true;
+            actionNumber = 7;
             AddMenu.Text = "Add (Polygon)";
         }
 
@@ -596,10 +626,14 @@ namespace WindowsFormsGraphics_math
         {
             CheckEngine();
             IntersectButton.Checked = true;
+            actionNumber = 4;
             AddMenu.Text = "Add (Intersect)";
         }
 
-
+        //                         0                1                2                     3                   4
+       // Action[] actions = { AddPointAction, AddLineAction, AddRightTriangeAction, AddRectangeAction, AddIntersectAction, 
+            //                          5                 6                7
+        //                       AddIsoscelesAction, AddCircleAction, AddPolygonAction};
 
     }
 }
