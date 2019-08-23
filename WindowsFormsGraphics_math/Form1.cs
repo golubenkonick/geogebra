@@ -359,13 +359,11 @@ namespace WindowsFormsGraphics_math
             if (IntersectButton.Checked)
             {
                 IntersectAction(sender, e);
-            }
-            
+            }            
             if (AddPointButton.Checked)
             {
                 AddPointAction(sender, e);
-            }
-           
+            }           
             if (AddLineButton.Checked)
             {
                 AddLineAction(sender, e);
