@@ -1,3 +1,0 @@
-C:\Users\Nick\Documents\Visual Studio 2010\Projects\WindowsFormsGraphics_math\WindowsFormsGraphics_math\obj\x86\Release\WindowsFormsGraphics_math.Form1.resources
-C:\Users\Nick\Documents\Visual Studio 2010\Projects\WindowsFormsGraphics_math\WindowsFormsGraphics_math\obj\x86\Release\WindowsFormsGraphics_math.Properties.Resources.resources
-C:\Users\Nick\Documents\Visual Studio 2010\Projects\WindowsFormsGraphics_math\WindowsFormsGraphics_math\obj\x86\Release\WindowsFormsGraphics_math.csproj.GenerateResource.Cache
