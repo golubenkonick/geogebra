@@ -377,6 +377,7 @@ namespace WindowsFormsGraphics_math
             }
 
             int iii = 0;
+            int iii2 = 0;
             //if (IntersectButton.Checked)
             //{
             //    AddIntersectAction(sender, e);
