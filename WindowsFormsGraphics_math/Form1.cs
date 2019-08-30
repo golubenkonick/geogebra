@@ -15,8 +15,13 @@ namespace WindowsFormsGraphics_math
     public partial class Form1 : Form
     {
         delegate void Action(object sender, MouseEventArgs e);
-        int actionNumber = 0;
-        Action[] actions;
+        string actionKey = "AddPointButton";
+        //Action[] actions;
+        Dictionary<string, Action> actions = new Dictionary<string, Action>(8);
+
+
+
+
 
         private CoordinateSystem cs1;      
         RealPoint firstPoint;
@@ -49,21 +54,21 @@ namespace WindowsFormsGraphics_math
             realFigureList = new List<RealFigure>();          
             selectedPoint = null;
             selectedLabel = null;
-            actions = new Action[8];
+            //actions = new Action[8];
           
         }
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            actions[0] = AddPointAction;
-            actions[1] = AddLineAction;
-            actions[2] = AddRightTriangeAction;
-            actions[3] = AddRectangeAction;
-            actions[4] = AddIntersectAction;
-            actions[5] = AddIsoscelesAction;
-            actions[6] = AddCircleAction;
-            actions[7] = AddPolygonAction;
+            actions["AddPointButton"] = AddPointAction;
+            actions["AddLineButton"] = AddLineAction;
+            actions["RightTriangleButton"] = AddRightTriangeAction;
+            actions["AddRectangleButton"] = AddRectangeAction;
+            actions["IntersectButton"] = AddIntersectAction;
+            actions["IsoscelesTriangleButton"] = AddIsoscelesAction;
+            actions["AddCircleButton"] = AddCircleAction;
+            actions["AddPolygonButton"] = AddPolygonAction;
 
         }
 
@@ -375,9 +380,9 @@ namespace WindowsFormsGraphics_math
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (actionNumber != -1)
+            if (actions.ContainsKey(actionKey))
             {
-                actions[actionNumber](sender, e);
+                actions[actionKey](sender, e);
             }
             pictureBox1.Invalidate();
         }
@@ -510,24 +515,8 @@ namespace WindowsFormsGraphics_math
         private void MoveButton_Click(object sender, EventArgs e)
         {
             CheckEngine();
-            actionNumber = -1;
+            actionKey = "MoveButton";
             MoveButton.Checked = true;
-        }
-
-        private void AddPointButton_Click(object sender, EventArgs e)
-        {
-            CheckEngine();
-            AddPointButton.Checked = true;
-            actionNumber = 0;
-            AddMenu.Text = "Add (Point)";
-        }
-
-        private void AddLineButton_Click(object sender, EventArgs e)
-        {
-            CheckEngine();
-            AddLineButton.Checked = true;
-            actionNumber = 1;
-            AddMenu.Text = "Add (Line)";
         }
 
         private void CheckEngine()
@@ -544,11 +533,26 @@ namespace WindowsFormsGraphics_math
             DeleteButton.Checked = false;
         }
 
+        private void AddPointButton_Click(object sender, EventArgs e)
+        {
+            CheckEngine();
+            AddPointButton.Checked = true;
+            actionKey = "AddPointButton";
+            AddMenu.Text = "Add (Point)";
+        }
+       
+        private void AddLineButton_Click(object sender, EventArgs e)
+        {
+            CheckEngine();
+            AddLineButton.Checked = true;
+            actionKey = "AddLineButton";
+            AddMenu.Text = "Add (Line)";
+        }
         private void AddRectangleButton_Click(object sender, EventArgs e)
         {
             CheckEngine();
             AddRectangleButton.Checked = true;
-            actionNumber = 3;
+            actionKey = "AddRectangleButton";
             AddMenu.Text = "Add (Rectangle)";
         }
 
@@ -556,7 +560,7 @@ namespace WindowsFormsGraphics_math
         {
             CheckEngine();
             AddCircleButton.Checked = true;
-            actionNumber = 6;
+            actionKey = "AddCircleButton";
             Text = ((ToolStripMenuItem)sender).Name;
             // { "AddCircleButton" => AddCircleAction, ... }
 
@@ -567,7 +571,7 @@ namespace WindowsFormsGraphics_math
         {
             CheckEngine();
             RightTriangleButton.Checked = true;
-            actionNumber = 2;
+            actionKey = "RightTriangleButton";
             AddMenu.Text = "Add (Right Triangle)";
         }
 
@@ -581,7 +585,7 @@ namespace WindowsFormsGraphics_math
         {
             CheckEngine();
             IsoscelesTriangleButton.Checked = true;
-            actionNumber = 5;
+            actionKey = "IsoscelesTriangleButton";
             AddMenu.Text = "Add (Isosceles Triangle)";
         }
 
@@ -589,7 +593,7 @@ namespace WindowsFormsGraphics_math
         {
             CheckEngine();
             AddPolygonButton.Checked = true;
-            actionNumber = 7;
+            actionKey = "AddPolygonButton";
             AddMenu.Text = "Add (Polygon)";
         }
 
@@ -597,7 +601,7 @@ namespace WindowsFormsGraphics_math
         {
             CheckEngine();
             IntersectButton.Checked = true;
-            actionNumber = 4;
+            actionKey = "IntersectButton";
             AddMenu.Text = "Add (Intersect)";
         }
 
