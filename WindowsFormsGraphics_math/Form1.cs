@@ -514,12 +514,11 @@ namespace WindowsFormsGraphics_math
 
         private void MoveButton_Click(object sender, EventArgs e)
         {
-            CheckEngine();
-            actionKey = "MoveButton";
+            CheckEngine(sender);           
             MoveButton.Checked = true;
         }
 
-        private void CheckEngine()
+        private void CheckEngine(object sender)
         {
             AddPointButton.Checked = false;
             AddLineButton.Checked = false;
@@ -531,78 +530,67 @@ namespace WindowsFormsGraphics_math
             IntersectButton.Checked = false;
             MoveButton.Checked = false;
             DeleteButton.Checked = false;
+            actionKey = ((ToolStripMenuItem)sender).Name;
         }
 
         private void AddPointButton_Click(object sender, EventArgs e)
         {
-            CheckEngine();
-            AddPointButton.Checked = true;
-            actionKey = "AddPointButton";
+            CheckEngine(sender);
+            AddPointButton.Checked = true;            
             AddMenu.Text = "Add (Point)";
         }
        
         private void AddLineButton_Click(object sender, EventArgs e)
         {
-            CheckEngine();
+            CheckEngine(sender);
             AddLineButton.Checked = true;
-            actionKey = "AddLineButton";
             AddMenu.Text = "Add (Line)";
         }
         private void AddRectangleButton_Click(object sender, EventArgs e)
         {
-            CheckEngine();
-            AddRectangleButton.Checked = true;
-            actionKey = "AddRectangleButton";
+            CheckEngine(sender);
+            AddRectangleButton.Checked = true;  
             AddMenu.Text = "Add (Rectangle)";
         }
 
         private void AddCircleButton_Click(object sender, EventArgs e)
         {
-            CheckEngine();
+            CheckEngine(sender);
             AddCircleButton.Checked = true;
-            actionKey = "AddCircleButton";
-            Text = ((ToolStripMenuItem)sender).Name;
-            // { "AddCircleButton" => AddCircleAction, ... }
-
             AddMenu.Text = "Add (Circle)";
         }
 
         private void RightTriangleButton_Click(object sender, EventArgs e)
         {
-            CheckEngine();
+            CheckEngine(sender);
             RightTriangleButton.Checked = true;
-            actionKey = "RightTriangleButton";
             AddMenu.Text = "Add (Right Triangle)";
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            CheckEngine();
-            actionKey = "DeleteButton";
+            CheckEngine(sender);           
             DeleteButton.Checked = true;
         }
 
         private void IsoscelesTriangleButton_Click(object sender, EventArgs e)
         {
-            CheckEngine();
-            IsoscelesTriangleButton.Checked = true;
-            actionKey = "IsoscelesTriangleButton";
+            CheckEngine(sender);
+            IsoscelesTriangleButton.Checked = true;         
             AddMenu.Text = "Add (Isosceles Triangle)";
         }
 
         private void AddPolygonButton_Click(object sender, EventArgs e)
         {
-            CheckEngine();
+            CheckEngine(sender);
             AddPolygonButton.Checked = true;
-            actionKey = "AddPolygonButton";
             AddMenu.Text = "Add (Polygon)";
         }
 
         private void IntersectButton_Click(object sender, EventArgs e)
         {
-            CheckEngine();
-            IntersectButton.Checked = true;
-            actionKey = "IntersectButton";
+            CheckEngine(sender);
+            IntersectButton.Checked = true;  
             AddMenu.Text = "Add (Intersect)";
         }
 
