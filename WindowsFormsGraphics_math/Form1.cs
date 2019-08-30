@@ -530,7 +530,8 @@ namespace WindowsFormsGraphics_math
             IntersectButton.Checked = false;
             MoveButton.Checked = false;
             DeleteButton.Checked = false;
-            actionKey = ((ToolStripMenuItem)sender).Name;
+            actionKey = ((ToolStripItem)sender).Name;
+            
         }
 
         private void AddPointButton_Click(object sender, EventArgs e)
