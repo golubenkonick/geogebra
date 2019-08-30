@@ -14,9 +14,9 @@ namespace WindowsFormsGraphics_math
     {
         delegate void Action(object sender, MouseEventArgs e);
         int actionNumber = 0;
-
-        private CoordinateSystem cs1;
         Action[] actions;
+
+        private CoordinateSystem cs1;      
         RealPoint firstPoint;
         RealPoint secondPoint;
         bool creatingLine;      
@@ -370,49 +370,13 @@ namespace WindowsFormsGraphics_math
             }
         }
 
+
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             if (actionNumber != -1)
             {
                 actions[actionNumber](sender, e);
             }
-
-            int iii = 0;
-            int iii2 = 0;
-            //if (IntersectButton.Checked)
-            //{
-            //    AddIntersectAction(sender, e);
-            //}            
-            //if (AddPointButton.Checked)
-            //{
-            //    AddPointAction(sender, e);
-            //}           
-            //if (AddLineButton.Checked)
-            //{
-            //    AddLineAction(sender, e);
-            //}
-            //if (AddRectangleButton.Checked)
-            //{
-            //    AddRectangeAction(sender, e);
-            //}
-            //if (AddCircleButton.Checked)
-            //{
-            //    AddCircleAction(sender, e);
-            //}
-            //if (RightTriangleButton.Checked)
-            //{
-            //    AddRightTriangeAction(sender, e);
-            //}
-            //if (AddPolygonButton.Checked)
-            //{
-            //    AddPolygonAction(sender, e);
-            //}
-
-            //if (IsoscelesTriangleButton.Checked)
-            //{
-            //    AddIsoscelesAction(sender, e);
-            //}
-            
             pictureBox1.Invalidate();
         }
 
@@ -591,6 +555,9 @@ namespace WindowsFormsGraphics_math
             CheckEngine();
             AddCircleButton.Checked = true;
             actionNumber = 6;
+            Text = ((ToolStripMenuItem)sender).Name;
+            // { "AddCircleButton" => AddCircleAction, ... }
+
             AddMenu.Text = "Add (Circle)";
         }
 
