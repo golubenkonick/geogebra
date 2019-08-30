@@ -578,6 +578,7 @@ namespace WindowsFormsGraphics_math
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             CheckEngine();
+            actionKey = "DeleteButton";
             DeleteButton.Checked = true;
         }
 
