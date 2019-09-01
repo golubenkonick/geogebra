@@ -40,11 +40,11 @@
             this.RightTriangleButton = new System.Windows.Forms.ToolStripMenuItem();
             this.IsoscelesTriangleButton = new System.Windows.Forms.ToolStripMenuItem();
             this.AddPolygonButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.IntersectButton = new System.Windows.Forms.ToolStripMenuItem();
             this.MoveButton = new System.Windows.Forms.ToolStripButton();
             this.DeleteButton = new System.Windows.Forms.ToolStripButton();
             this.RoundingButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.IntersectButton = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -100,32 +100,32 @@
             this.AddPointButton.CheckOnClick = true;
             this.AddPointButton.CheckState = System.Windows.Forms.CheckState.Checked;
             this.AddPointButton.Name = "AddPointButton";
-            this.AddPointButton.Size = new System.Drawing.Size(199, 30);
-            this.AddPointButton.Text = "Add Point";
+            this.AddPointButton.Size = new System.Drawing.Size(160, 30);
+            this.AddPointButton.Text = "Point";
             this.AddPointButton.Click += new System.EventHandler(this.AddPointButton_Click);
             // 
             // AddLineButton
             // 
             this.AddLineButton.CheckOnClick = true;
             this.AddLineButton.Name = "AddLineButton";
-            this.AddLineButton.Size = new System.Drawing.Size(199, 30);
-            this.AddLineButton.Text = "Add Line";
+            this.AddLineButton.Size = new System.Drawing.Size(160, 30);
+            this.AddLineButton.Text = "Line";
             this.AddLineButton.Click += new System.EventHandler(this.AddLineButton_Click);
             // 
             // AddRectangleButton
             // 
             this.AddRectangleButton.CheckOnClick = true;
             this.AddRectangleButton.Name = "AddRectangleButton";
-            this.AddRectangleButton.Size = new System.Drawing.Size(199, 30);
-            this.AddRectangleButton.Text = "Add Rectangle";
+            this.AddRectangleButton.Size = new System.Drawing.Size(160, 30);
+            this.AddRectangleButton.Text = "Rectangle";
             this.AddRectangleButton.Click += new System.EventHandler(this.AddRectangleButton_Click);
             // 
             // AddCircleButton
             // 
             this.AddCircleButton.CheckOnClick = true;
             this.AddCircleButton.Name = "AddCircleButton";
-            this.AddCircleButton.Size = new System.Drawing.Size(199, 30);
-            this.AddCircleButton.Text = "Add Circle";
+            this.AddCircleButton.Size = new System.Drawing.Size(160, 30);
+            this.AddCircleButton.Text = "Circle";
             this.AddCircleButton.Click += new System.EventHandler(this.AddCircleButton_Click);
             // 
             // AddTriangleButton
@@ -134,32 +134,44 @@
             this.RightTriangleButton,
             this.IsoscelesTriangleButton});
             this.AddTriangleButton.Name = "AddTriangleButton";
-            this.AddTriangleButton.Size = new System.Drawing.Size(199, 30);
-            this.AddTriangleButton.Text = "Add Triangle";
+            this.AddTriangleButton.Size = new System.Drawing.Size(160, 30);
+            this.AddTriangleButton.Text = "Triangle";
             // 
             // RightTriangleButton
             // 
             this.RightTriangleButton.CheckOnClick = true;
             this.RightTriangleButton.Name = "RightTriangleButton";
-            this.RightTriangleButton.Size = new System.Drawing.Size(154, 30);
-            this.RightTriangleButton.Text = "Right";
+            this.RightTriangleButton.Size = new System.Drawing.Size(219, 30);
+            this.RightTriangleButton.Text = "Right Triangle";
             this.RightTriangleButton.Click += new System.EventHandler(this.RightTriangleButton_Click);
             // 
             // IsoscelesTriangleButton
             // 
             this.IsoscelesTriangleButton.CheckOnClick = true;
             this.IsoscelesTriangleButton.Name = "IsoscelesTriangleButton";
-            this.IsoscelesTriangleButton.Size = new System.Drawing.Size(154, 30);
-            this.IsoscelesTriangleButton.Text = "Isosceles";
+            this.IsoscelesTriangleButton.Size = new System.Drawing.Size(219, 30);
+            this.IsoscelesTriangleButton.Text = "Isosceles Triangle";
             this.IsoscelesTriangleButton.Click += new System.EventHandler(this.IsoscelesTriangleButton_Click);
             // 
             // AddPolygonButton
             // 
             this.AddPolygonButton.CheckOnClick = true;
             this.AddPolygonButton.Name = "AddPolygonButton";
-            this.AddPolygonButton.Size = new System.Drawing.Size(199, 30);
-            this.AddPolygonButton.Text = "Add Polygon";
+            this.AddPolygonButton.Size = new System.Drawing.Size(160, 30);
+            this.AddPolygonButton.Text = "Polygon";
             this.AddPolygonButton.Click += new System.EventHandler(this.AddPolygonButton_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
+            // 
+            // IntersectButton
+            // 
+            this.IntersectButton.Name = "IntersectButton";
+            this.IntersectButton.Size = new System.Drawing.Size(160, 30);
+            this.IntersectButton.Text = "Intersect";
+            this.IntersectButton.Click += new System.EventHandler(this.IntersectButton_Click);
             // 
             // MoveButton
             // 
@@ -192,18 +204,6 @@
             this.RoundingButton.Name = "RoundingButton";
             this.RoundingButton.Size = new System.Drawing.Size(93, 29);
             this.RoundingButton.Text = "Rounding";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(196, 6);
-            // 
-            // IntersectButton
-            // 
-            this.IntersectButton.Name = "IntersectButton";
-            this.IntersectButton.Size = new System.Drawing.Size(199, 30);
-            this.IntersectButton.Text = "Intersect";
-            this.IntersectButton.Click += new System.EventHandler(this.IntersectButton_Click);
             // 
             // Form1
             // 

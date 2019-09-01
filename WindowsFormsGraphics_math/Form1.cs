@@ -15,13 +15,8 @@ namespace WindowsFormsGraphics_math
     public partial class Form1 : Form
     {
         delegate void Action(object sender, MouseEventArgs e);
-        string actionKey = "AddPointButton";
-        //Action[] actions;
+        string actionKey = "AddPointButton";     
         Dictionary<string, Action> actions = new Dictionary<string, Action>(8);
-
-
-
-
 
         private CoordinateSystem cs1;      
         RealPoint firstPoint;
@@ -35,12 +30,11 @@ namespace WindowsFormsGraphics_math
         Label selectedLabel;
         RealSegment selectedSeg1 = null;
         RealSegment selectedSeg2 = null;
-        //List<Label> labelList;
+       
 
         public Form1()
         {
             InitializeComponent();
-
             // create Coordinate System
             int unitInterval = 30;
             int x0 = pictureBox1.Width / 2;
@@ -53,9 +47,7 @@ namespace WindowsFormsGraphics_math
             creatingLine = false;
             realFigureList = new List<RealFigure>();          
             selectedPoint = null;
-            selectedLabel = null;
-            //actions = new Action[8];
-          
+            selectedLabel = null;          
         }
 
 
@@ -81,7 +73,6 @@ namespace WindowsFormsGraphics_math
                 figure.Draw(g, cs1);
             }
         }
-
 
         private void AddIntersectAction(object sender, MouseEventArgs e)
         {
@@ -386,9 +377,7 @@ namespace WindowsFormsGraphics_math
             }
             pictureBox1.Invalidate();
         }
-
-
-
+        
         private RealFigure SelectFigure(MouseEventArgs e)
         {
             foreach (RealFigure figure in realFigureList)
@@ -403,22 +392,6 @@ namespace WindowsFormsGraphics_math
             }
             return null;
         }
-
-        //private void SelectFigure(MouseEventArgs e)
-        //{
-        //    foreach (RealFigure figure in realFigureList)
-        //    {
-        //        double mouseX = cs1.VisualToRealX(e.X);
-        //        double mouseY = cs1.VisualToRealY(e.Y);
-        //        clickPoint = new RealPoint(mouseX, mouseY);
-        //        if (figure.HitTest(clickPoint, cs1))
-        //        {
-        //            selected = figure;
-        //            break;
-        //        }
-        //    }
-        //}
-
 
         private void SelectLabel(MouseEventArgs e) // top left --> center // change this code 
         { 
@@ -438,7 +411,6 @@ namespace WindowsFormsGraphics_math
             }
         }
         
-
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
              if (MoveButton.Checked)
@@ -511,12 +483,7 @@ namespace WindowsFormsGraphics_math
                 pictureBox1.Invalidate();
             }
         }
-
-        private void MoveButton_Click(object sender, EventArgs e)
-        {
-            CheckEngine(sender);           
-            MoveButton.Checked = true;
-        }
+              
 
         private void CheckEngine(object sender)
         {
@@ -530,75 +497,69 @@ namespace WindowsFormsGraphics_math
             IntersectButton.Checked = false;
             MoveButton.Checked = false;
             DeleteButton.Checked = false;
+            if (sender is ToolStripMenuItem)
+            {
+                ((ToolStripMenuItem)sender).Checked = true;
+                AddMenu.Text = "Add (" + ((ToolStripMenuItem)sender).Text + ")";
+                //AddMenu.Text = " (" + sender.ToString() + ")";
+            }
+            if (sender is ToolStripButton)
+            {
+                ((ToolStripButton)sender).Checked = true;
+            }          
             actionKey = ((ToolStripItem)sender).Name;
             
         }
 
-        private void AddPointButton_Click(object sender, EventArgs e)
+
+        private void MoveButton_Click(object sender, EventArgs e)
+        {
+            CheckEngine(sender);        
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
             CheckEngine(sender);
-            AddPointButton.Checked = true;            
-            AddMenu.Text = "Add (Point)";
+        }
+
+        private void AddPointButton_Click(object sender, EventArgs e)
+        {
+            CheckEngine(sender); 
         }
        
         private void AddLineButton_Click(object sender, EventArgs e)
         {
             CheckEngine(sender);
-            AddLineButton.Checked = true;
-            AddMenu.Text = "Add (Line)";
         }
         private void AddRectangleButton_Click(object sender, EventArgs e)
         {
             CheckEngine(sender);
-            AddRectangleButton.Checked = true;  
-            AddMenu.Text = "Add (Rectangle)";
         }
 
         private void AddCircleButton_Click(object sender, EventArgs e)
         {
             CheckEngine(sender);
-            AddCircleButton.Checked = true;
-            AddMenu.Text = "Add (Circle)";
         }
 
         private void RightTriangleButton_Click(object sender, EventArgs e)
         {
             CheckEngine(sender);
-            RightTriangleButton.Checked = true;
-            AddMenu.Text = "Add (Right Triangle)";
-        }
-
-        private void DeleteButton_Click(object sender, EventArgs e)
-        {
-            CheckEngine(sender);           
-            DeleteButton.Checked = true;
-        }
+        }    
 
         private void IsoscelesTriangleButton_Click(object sender, EventArgs e)
         {
-            CheckEngine(sender);
-            IsoscelesTriangleButton.Checked = true;         
-            AddMenu.Text = "Add (Isosceles Triangle)";
+            CheckEngine(sender); 
         }
 
         private void AddPolygonButton_Click(object sender, EventArgs e)
         {
             CheckEngine(sender);
-            AddPolygonButton.Checked = true;
-            AddMenu.Text = "Add (Polygon)";
         }
 
         private void IntersectButton_Click(object sender, EventArgs e)
         {
             CheckEngine(sender);
-            IntersectButton.Checked = true;  
-            AddMenu.Text = "Add (Intersect)";
-        }
-
-        //                         0                1                2                     3                   4
-       // Action[] actions = { AddPointAction, AddLineAction, AddRightTriangeAction, AddRectangeAction, AddIntersectAction, 
-            //                          5                 6                7
-        //                       AddIsoscelesAction, AddCircleAction, AddPolygonAction};
+        }       
 
     }
 }
