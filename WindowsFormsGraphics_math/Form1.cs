@@ -416,7 +416,13 @@ namespace WindowsFormsGraphics_math
              if (MoveButton.Checked)
              {                 
                  SelectLabel(e);              
-                 selected = SelectFigure(e); 
+                 selected = SelectFigure(e);
+
+                 if (selected != null)
+                     Text = selected.ToString();
+                 else
+                     Text = "null";
+
                  if (selected != null)
                  {                    
                      selected.SetBackLight();
